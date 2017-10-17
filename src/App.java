@@ -1,66 +1,9 @@
-import java.util.Scanner;
-import java.util.function.Consumer;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Scanner;
+import java.util.function.Consumer;
 
 public class App {
-
-    public static void main(String[] args) {
-        /**
-         * Cmd input object.
-         */
-        Scanner sc = new Scanner(System.in);
-
-        /**
-         * Enter n, q.
-         */
-        int n = sc.nextInt();
-        int q = sc.nextInt();
-
-        /**
-         * Initialize segmentTreeData.
-         */
-        List<Integer> segmentTreeData = new ArrayList<>(n);
-        for (int p = 0; p < n; ++p) {
-            segmentTreeData.add(sc.nextInt());
-        }
-
-        /**
-         * Initialize segmentTree instance.
-         */
-        SegmentTree st = new SegmentTree(segmentTreeData);
-        int stSize = st.treeScale;
-
-        /**
-         * Execute main flow.
-         */
-        for (int b = 0; b < q; ++b) {
-            int currentNextInt = sc.nextInt();
-            /**
-             * 1 - Perform set operation.
-             * 2 - Perform increment operation.
-             * 3 - Print even evaluateSum.
-             * 4 - Print odd evaluateSum.
-             */
-            if (currentNextInt == 1) {
-                st.executeSetOperation(1, 0, stSize - 1,
-                        sc.nextInt() - 1, sc.nextInt());
-
-            } else if (currentNextInt == 2) {
-                st.executeIncrementOperation(1, 0, stSize - 1,
-                        sc.nextInt() - 1, sc.nextInt() - 1);
-
-            } else if (currentNextInt == 3) {
-                System.out.println(st.processEvenSumValue(1, 0, stSize - 1,
-                        sc.nextInt() - 1, sc.nextInt() - 1));
-
-            } else if (currentNextInt == 4) {
-                System.out.println(st.processOddSumValue(1, 0, stSize - 1,
-                        sc.nextInt() - 1, sc.nextInt() - 1));
-            }
-        }
-    }
-
     static class V {
 
         V(int vl) {
@@ -231,6 +174,62 @@ public class App {
             });
             return processEvenSumValue(v * 2, cL, mdl, l, Integer.min(r, mdl)) +
                     processEvenSumValue(v * 2 + 1, mdl + 1, cR, Integer.max(l, mdl + 1), r);
+        }
+    }
+
+    public static void main(String[] args) {
+        /**
+         * Cmd input object.
+         */
+        Scanner sc = new Scanner(System.in);
+
+        /**
+         * Enter n, q.
+         */
+        int n = sc.nextInt();
+        int q = sc.nextInt();
+
+        /**
+         * Initialize segmentTreeData.
+         */
+        List<Integer> segmentTreeData = new ArrayList<>(n);
+        for (int p = 0; p < n; ++p) {
+            segmentTreeData.add(sc.nextInt());
+        }
+
+        /**
+         * Initialize segmentTree instance.
+         */
+        SegmentTree st = new SegmentTree(segmentTreeData);
+        int stSize = st.treeScale;
+
+        /**
+         * Execute main flow.
+         */
+        for (int b = 0; b < q; ++b) {
+            int currentNextInt = sc.nextInt();
+            /**
+             * 1 - Perform set operation.
+             * 2 - Perform increment operation.
+             * 3 - Print even evaluateSum.
+             * 4 - Print odd evaluateSum.
+             */
+            if (currentNextInt == 1) {
+                st.executeSetOperation(1, 0, stSize - 1,
+                        sc.nextInt() - 1, sc.nextInt());
+
+            } else if (currentNextInt == 2) {
+                st.executeIncrementOperation(1, 0, stSize - 1,
+                        sc.nextInt() - 1, sc.nextInt() - 1);
+
+            } else if (currentNextInt == 3) {
+                System.out.println(st.processEvenSumValue(1, 0, stSize - 1,
+                        sc.nextInt() - 1, sc.nextInt() - 1));
+
+            } else if (currentNextInt == 4) {
+                System.out.println(st.processOddSumValue(1, 0, stSize - 1,
+                        sc.nextInt() - 1, sc.nextInt() - 1));
+            }
         }
     }
 }
